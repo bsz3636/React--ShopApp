@@ -1,5 +1,5 @@
 import styles from './Product.module.scss';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ProductImage from './ProductImage/ProductImage';
 import ProductForm from './ProductForm/ProductForm';
@@ -11,17 +11,17 @@ const Product = ({title, name, colors, sizes, basePrice}) => {
   
   const [currentSize, setCurrentSize] = useState(sizes[0].name)
  
-  const getPrice = () => {
+  const price = useMemo (() => {
     const clickedSize = sizes.find(element => element.name === currentSize)
-    return basePrice + clickedSize.additionalPrice;
-  }
+    return basePrice + clickedSize.additionalPrice
+  }, [sizes, basePrice, currentSize]);
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log ('Summary');
     console.log ('=============');
     console.log ('Name: ', title);
-    console.log ('Price: ', getPrice());
+    console.log ('Price: ', price);
     console.log ('Size: ', currentSize);
     console.log ('Color: ', currentColor);
   };
@@ -37,7 +37,7 @@ const Product = ({title, name, colors, sizes, basePrice}) => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>{getPrice()} $</span>
+          <span className={styles.price}>{price} $</span>
         </header>
         
         <ProductForm
