@@ -52,14 +52,14 @@ const Product = ({title, name, colors, sizes, basePrice}) => {
       </div>
     </article>
   )
-}
+};
   
 Product.propTypes = {
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired,
-  size: PropTypes.array.isRequired,
-  color: PropTypes.array.isRequired,
+  sizes: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired,
 };
 
 export default Product;
